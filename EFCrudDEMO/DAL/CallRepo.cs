@@ -1,0 +1,53 @@
+﻿using EFCrudDEMO.Model;
+using System.Data.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EFCrudDEMO.DAL
+{
+    public class CallRepo
+    {
+        public void Create(Call call)
+        {
+            using (CallContext db = new CallContext())
+            {
+                db.Set<Call>().Attach(call);
+                db.Entry(call).State = EntityState.Added;
+                db.SaveChanges();
+            }
+        }
+
+        public void Update(Call call)
+        {
+            using (CallContext db = new CallContext())
+            {
+                db.Set<Call>().Attach(call);
+                db.Entry(call).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+
+        public void Delete(Call call)
+        {
+            using (CallContext db = new CallContext())
+            {
+                db.Set<Call>().Attach(call);
+                db.Entry(call).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+        }
+
+        public List<Call> View()
+        {
+            using (CallContext callCont = new CallContext())
+            {
+                var data = callCont.Calls.ToList();
+                return data;
+            }
+        }
+    }
+}
