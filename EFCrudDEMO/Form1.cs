@@ -16,6 +16,7 @@ namespace EFCrudDEMO
     {
         CallRepo cr = new CallRepo();
         Call calls = new Call();
+        private int CallId;
         public Form1()
         {
             InitializeComponent();
@@ -47,16 +48,17 @@ namespace EFCrudDEMO
         {
             calls.CallID = Convert.ToInt32(DGVCalls.SelectedRows[0].Cells[1].Value.ToString());
             calls.MobileNumber = DGVCalls.SelectedRows[0].Cells[1].Value.ToString();
+            CallId = calls.CallID;
         }
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            cr.Update(calls);
+            cr.Update(CallId);
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            cr.Delete(calls);
+            cr.Delete(CallId);
             LoadDGV();
         }
     }

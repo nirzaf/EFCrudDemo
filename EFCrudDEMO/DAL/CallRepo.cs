@@ -20,23 +20,28 @@ namespace EFCrudDEMO.DAL
             }
         }
 
-        public void Update(Call call)
+        public void Update(int Id)
         {
             using (CallContext db = new CallContext())
             {
-                db.Set<Call>().Attach(call);
-                db.Entry(call).State = EntityState.Modified;
-                db.SaveChanges();
+                var callLogs = db.Calls.FirstOrDefault(c => c.CallID == Id);
+                if (callLogs != null)
+                {
+                    db.Set<Call>().Attach(callLogs);
+                    db.Entry(callLogs).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
         }
 
 
-        public void Delete(Call call)
+        public void Delete(int Id)
         {
             using (CallContext db = new CallContext())
             {
-                db.Set<Call>().Attach(call);
-                db.Entry(call).State = EntityState.Deleted;
+                var callLogs = db.Calls.FirstOrDefault(c => c.CallID == Id);
+                db.Set<Call>().Attach(callLogs);
+                db.Entry(callLogs).State = EntityState.Deleted;
                 db.SaveChanges();
             }
         }
