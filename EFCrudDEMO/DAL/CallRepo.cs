@@ -40,9 +40,12 @@ namespace EFCrudDEMO.DAL
             using (CallContext db = new CallContext())
             {
                 var callLogs = db.Calls.FirstOrDefault(c => c.CallID == Id);
-                db.Set<Call>().Attach(callLogs);
-                db.Entry(callLogs).State = EntityState.Deleted;
-                db.SaveChanges();
+                if (callLogs != null)
+                {
+                    db.Set<Call>().Attach(callLogs);
+                    db.Entry(callLogs).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
             }
         }
 

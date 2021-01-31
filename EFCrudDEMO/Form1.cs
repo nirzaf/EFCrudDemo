@@ -46,7 +46,7 @@ namespace EFCrudDEMO
 
         private void DGVCalls_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            calls.CallID = Convert.ToInt32(DGVCalls.SelectedRows[0].Cells[1].Value.ToString());
+            calls.CallID = Convert.ToInt32(DGVCalls.SelectedRows[0].Cells[0].Value.ToString());
             calls.MobileNumber = DGVCalls.SelectedRows[0].Cells[1].Value.ToString();
             CallId = calls.CallID;
         }
